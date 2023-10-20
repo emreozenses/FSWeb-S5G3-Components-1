@@ -88,6 +88,15 @@ const data = [
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`,
   },
+  {
+    baslik: "6 Ay'da Full Stack Web Developer Olmak",
+    tarih: "20 Ekim 2023",
+    ilkParagraf: `Hergün çalışmalısın`,
+
+    ikinciParagraf: `1000 saat pratiği aştıktan sonra daha kolay gelişim göstereceksin.`,
+
+    ucuncuParagraf: `10.000 saatte usta olacaksın!`,
+  },
 ];
 
 /*
@@ -104,6 +113,9 @@ const data = [
     <button class="expandButton">+</button>
   </div>
 
+ */
+
+/*
   Adım 2: Hala `haberYapici` içindeyiz, button.expandButton 'a bir click event dinleyici ekleyin.
   Bu dinleyici div.article öğesine 'article-open' class'ını ekleyip/çıkaracak (toogle).
 
@@ -115,3 +127,46 @@ const data = [
   Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
   Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
+function haberYapici(article) {
+  const articleDiv = document.createElement("div");
+  articleDiv.className = "article";
+
+  const h2 = document.createElement("h2");
+  h2.textContent = article.baslik;
+
+  const p = document.createElement("p");
+  p.className = "tarih";
+  p.textContent = article.tarih;
+
+  const p1 = document.createElement("p");
+  p1.textContent = article.ilkParagraf;
+
+  const p2 = document.createElement("p");
+  p2.textContent = article.ikinciParagraf;
+
+  const p3 = document.createElement("p");
+  p3.textContent = article.ucuncuParagraf;
+
+  const button = document.createElement("button");
+  button.className = "expandButton";
+  button.textContent = "+";
+  button.addEventListener("click", (e) => {
+    articleDiv.classList.toggle("article-open");
+  });
+
+  articleDiv.append(h2);
+  articleDiv.append(p);
+  articleDiv.append(p1);
+  articleDiv.append(p2);
+  articleDiv.append(p3);
+  articleDiv.append(button);
+
+  return articleDiv;
+}
+
+const articlesDiv = document.querySelector(".articles");
+
+data.forEach((article) => {
+  const newArticle = haberYapici(article);
+  articlesDiv.append(newArticle);
+});
